@@ -4,7 +4,7 @@ import Main from '../components/Main'
 
 export default function Home() {
     return (
-        <div className='max-sm:mt-7'>
+        <div className='max-sm:mt-7 mt-3'>
             <Header />
             <Main />
         </div>
