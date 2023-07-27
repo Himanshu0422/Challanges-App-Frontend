@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import logo from '../images/logo.jpeg';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
 
+    const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const handleLinkClick = () => {
         window.open('https://www.linkedin.com/in/himanshumittal035/', '_blank');
@@ -14,17 +16,25 @@ export default function Header() {
         setNav(!nav);
     };
 
+    const logoutHandler = () => {
+        localStorage.clear();
+        navigate('/login');
+    }
+
     return (
         <div className="flex justify-between items-center p-7 mb-10">
             <div className=''>
-                <h1 className='text-4xl italic font-mono'>
-                    Challanges
+                <h1 className='text-4xl italic font-mono lg:flex hidden'>
+                    Challenges App
                 </h1>
-                <h1 className='text-4xl italic font-mono'>
+                <h1 className='text-4xl italic font-mono max-lg:flex hidden'>
+                    Challenges
+                </h1>
+                <h1 className='text-4xl italic font-mono max-lg:flex hidden'>
                     app
                 </h1>
             </div>
-            <nav className="text-white hidden md:flex">
+            <nav className="text-white hidden lg:flex">
                 <ul className='flex'>
                     <li className='flex cursor-pointer px-3'
                         onClick={() => navigate('/')}
@@ -33,11 +43,11 @@ export default function Header() {
                         <div className='p-1 font-serif text-lg'>Home</div>
                     </li>
                     <li className='flex cursor-pointer px-3'
-                        onClick={() => navigate('/challanges')}
+                        onClick={() => navigate('/challenges')}
                     >
                         <img src='https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/000000/external-coding-online-learning-vitaliy-gorbachev-flat-vitaly-gorbachev.png'
                             alt='home' className='w-[25px] h-[25px] m-1' />
-                        <div className='p-1 font-serif text-lg'>Challanges</div>
+                        <div className='p-1 font-serif text-lg'>Challenges</div>
                     </li>
                     <li className='flex cursor-pointer px-3'
                         onClick={() => handleLinkClick()}
@@ -46,22 +56,39 @@ export default function Header() {
                             alt='home' className='w-[25px] h-[25px] m-1' />
                         <div className='p-1 font-serif text-lg'>Author</div>
                     </li>
+                    {user?.isAdmin ? (
+                        <li className='flex cursor-pointer px-3'
+                            onClick={() => navigate('/question')}
+                        >
+                            <img src='https://img.icons8.com/officel/40/000000/community-grants.png' alt='home' className='w-[25px] h-[25px] m-1' />
+                            <div className='p-1 font-serif text-lg'>Add Question</div>
+                        </li>
+                    ) : (
+                        <li className='flex cursor-pointer px-3'
+                            onClick={() => navigate('/contribute')}
+                        >
+                            <img src='https://img.icons8.com/officel/40/000000/community-grants.png' alt='home' className='w-[25px] h-[25px] m-1' />
+                            <div className='p-1 font-serif text-lg'>Contribute</div>
+                        </li>
+                    )
+                    }
                     <li className='flex cursor-pointer px-3'
-                        onClick={() => navigate('/contribute')}
+                        onClick={() => logoutHandler()}
                     >
-                        <img src='https://img.icons8.com/officel/40/000000/community-grants.png' alt='home' className='w-[25px] h-[25px] m-1' />
-                        <div className='p-1 font-serif text-lg'>Contribute</div>
+                        <AiOutlineLogout className='w-[25px] h-[25px] m-1' />
+                        <div className='p-1 font-serif text-lg'>Logout</div>
                     </li>
                 </ul>
             </nav>
-            <div onClick={handleNav} className='block md:hidden cursor-pointer'>
+            <div onClick={handleNav} className='block lg:hidden cursor-pointer'>
                 {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
             </div>
             <ul className={nav ? 'fixed left-0 top-16 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500' : 'ease-in-out duration-500 fixed left-[-100%]'}>
-                <li className='p-4 border-b border-gray-600'>Home</li>
-                <li className='p-4 border-b border-gray-600'>Challanges</li>
-                <li className='p-4 border-b border-gray-600'>About</li>
-                <li className='p-4 border-b border-gray-600'>Contribute</li>
+                <li className='p-4 border-b border-gray-600' onClick={() => navigate('/')}>Home</li>
+                <li className='p-4 border-b border-gray-600' onClick={() => navigate('/challenges')}>challenges</li>
+                <li className='p-4 border-b border-gray-600' onClick={() => handleLinkClick()}>About</li>
+                <li className='p-4 border-b border-gray-600' onClick={() => navigate('/question')}>Add Question</li>
+                <li className='p-4 border-b border-gray-600' onClick={() => logoutHandler()}>Logout</li>
             </ul>
         </div>
     )
