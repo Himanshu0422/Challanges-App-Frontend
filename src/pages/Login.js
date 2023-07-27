@@ -1,28 +1,27 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+export default function Login() {
 
-export default function Register() {
-
-    const nameRef = useRef();
     const emailRef = useRef();
     const passRef = useRef();
     const navigate = useNavigate();
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const data = {
-            name: nameRef.current.value,
-            email: emailRef.current.value,
-            password: passRef.current.value,
-        }
+
         try {
-            const response = await axios.post('/user/register', data);
+            const data = {
+                email: emailRef.current.value,
+                password: passRef.current.value,
+            }
+            const response = await axios.post('/user/login', data);
             if (response.data.success) {
                 toast.success(response.data.message);
-                navigate("/login");
+                localStorage.setItem("token",response.data.data)
+                navigate("/");
             } else {
                 console.log(response.data);
                 toast.error(response.data.message);
@@ -38,21 +37,8 @@ export default function Register() {
             <div className="mx-auto w-[100%]">
                 <div className="max-w-md mx-auto bg-opacity-100 shadow-2xl rounded-lg overflow-hidden">
                     <div className="px-6 py-4">
-                        <h2 className="text-2xl font-semibold mb-4">Register</h2>
+                        <h2 className="text-2xl font-semibold mb-4">Login</h2>
                         <form onSubmit={submitHandler}>
-                            <div className="mb-4">
-                                <label className="block text-dark-700 text-sm font-bold mb-2" htmlFor="name">
-                                    Name
-                                </label>
-                                <input
-                                    className="appearance-none border rounded w-full py-2 px-3 text-dark-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="name"
-                                    type="text"
-                                    placeholder="Your Name"
-                                    ref={nameRef}
-                                    required
-                                />
-                            </div>
                             <div className="mb-4">
                                 <label className="block text-dark-700 text-sm font-bold mb-2" htmlFor="email">
                                     Email
@@ -83,13 +69,13 @@ export default function Register() {
                                 className="bg-purple-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-purple-700"
                                 type="submit"
                             >
-                                Register
+                                Login
                             </button>
                         </form>
                         <p className='text-gray-600 pt-2'>
-                            Already have an account?
+                            Don't have an account?
                         </p>
-                        <Link to='/login' className='text-gray-800'>Sign In</Link>
+                        <Link to='/register' className='text-gray-800'>Sign Up</Link>
                     </div>
                 </div>
             </div>

@@ -9,3 +9,9 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.backgound-color{
+    background-color: rgba(16 18 27 / 25%);
+    border-radius: 12px;
+    margin: 0 5px;
+}
