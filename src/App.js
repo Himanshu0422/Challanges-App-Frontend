@@ -12,7 +12,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Question from "./pages/Question";
 import ContributedQuestion from "./pages/ContributedQuestion";
 import Challenges from "./pages/Challenges";
-  
+import Hooks from "./pages/Challenges/Hooks";
+import RouterQues from "./pages/Challenges/RouterQues";
+import CustomHooks from "./pages/Challenges/CustomHooks";
+import ContextApi from "./pages/Challenges/ContextApi";
+import Debugging from "./pages/Challenges/Debugging";
+import Portals from "./pages/Challenges/Portals";
+import ChallengesIntro from "./pages/Challenges/ChallengesIntro";
 
 function App() {
 	
@@ -74,7 +80,15 @@ function App() {
 								<Challenges />
 							</ProtectedRoute>
 						}
-					/>
+					>
+						<Route path="/challenges" element={<ChallengesIntro />} />
+						<Route path="/challenges/hooks" element={<Hooks />} />
+						<Route path="/challenges/router" element={<RouterQues />} />
+						<Route path="/challenges/custom-hooks" element={<CustomHooks />} />
+						<Route path="/challenges/context-api" element={<ContextApi />} />
+						<Route path="/challenges/debugging" element={<Debugging />} />
+						<Route path="/challenges/portals" element={<Portals />} />
+					</Route>
 				</Routes>
 			</Router>
     	</div>

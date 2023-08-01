@@ -31,7 +31,7 @@ export default function Header() {
                     Challenges
                 </h1>
                 <h1 className='text-4xl italic font-mono max-lg:flex hidden'>
-                    app
+                    App
                 </h1>
             </div>
             <nav className="text-white hidden lg:flex">
@@ -83,12 +83,12 @@ export default function Header() {
             <div onClick={handleNav} className='block lg:hidden cursor-pointer'>
                 {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
             </div>
-            <ul className={nav ? 'fixed left-0 top-16 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500' : 'ease-in-out duration-500 fixed left-[-100%]'}>
-                <li className='p-4 border-b border-gray-600' onClick={() => navigate('/')}>Home</li>
-                <li className='p-4 border-b border-gray-600' onClick={() => navigate('/challenges')}>challenges</li>
-                <li className='p-4 border-b border-gray-600' onClick={() => handleLinkClick()}>About</li>
-                <li className='p-4 border-b border-gray-600' onClick={() => navigate('/question')}>Add Question</li>
-                <li className='p-4 border-b border-gray-600' onClick={() => logoutHandler()}>Logout</li>
+            <ul className={nav ? 'fixed left-0 top-0 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500 text-white z-20' : 'ease-in-out duration-500 fixed left-[-100%]'}>
+                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => {navigate('/')}}>Home</li>
+                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => navigate('/challenges')}>Challenges</li>
+                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => handleLinkClick()}>About</li>
+                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => navigate('/question')}>{user?.isAdmin ? 'Add Question' : 'Contribute'}</li>
+                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => logoutHandler()}>Logout</li>
             </ul>
         </div>
     )
