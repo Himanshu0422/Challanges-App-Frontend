@@ -22,7 +22,7 @@ export default function Header() {
     }
 
     return (
-        <div className="flex justify-between items-center p-7 mb-10">
+        <div className="flex justify-between items-center p-7 mb-7">
             <div className=''>
                 <h1 className='text-4xl italic font-mono lg:flex hidden'>
                     Challenges App

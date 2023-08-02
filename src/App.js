@@ -12,13 +12,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Question from "./pages/Question";
 import ContributedQuestion from "./pages/ContributedQuestion";
 import Challenges from "./pages/Challenges";
-import Hooks from "./pages/Challenges/Hooks";
-import RouterQues from "./pages/Challenges/RouterQues";
-import CustomHooks from "./pages/Challenges/CustomHooks";
-import ContextApi from "./pages/Challenges/ContextApi";
-import Debugging from "./pages/Challenges/Debugging";
-import Portals from "./pages/Challenges/Portals";
 import ChallengesIntro from "./pages/Challenges/ChallengesIntro";
+import TopicQues from "./pages/Challenges/TopicQues";
+import Challenge from "./pages/Challenge";
 
 function App() {
 	
@@ -82,13 +78,22 @@ function App() {
 						}
 					>
 						<Route path="/challenges" element={<ChallengesIntro />} />
-						<Route path="/challenges/hooks" element={<Hooks />} />
-						<Route path="/challenges/router" element={<RouterQues />} />
-						<Route path="/challenges/custom-hooks" element={<CustomHooks />} />
-						<Route path="/challenges/context-api" element={<ContextApi />} />
-						<Route path="/challenges/debugging" element={<Debugging />} />
-						<Route path="/challenges/portals" element={<Portals />} />
+						<Route path="/challenges/hooks" element={<TopicQues topic='Hooks' />} />
+						<Route path="/challenges/router" element={<TopicQues topic='Router' />} />
+						<Route path="/challenges/custom-hooks" element={<TopicQues topic='CustomHooks' />} />
+						<Route path="/challenges/context-api" element={<TopicQues topic='ContextApi' />} />
+						<Route path="/challenges/debugging" element={<TopicQues topic='Debugging' />} />
+						<Route path="/challenges/portals" element={<TopicQues topic='Portals' />} />
 					</Route>
+					<Route
+						exact
+						path="/challenge/:questionId"
+						element={
+							<ProtectedRoute>
+								<Challenge />
+							</ProtectedRoute>
+						}
+					/>
 				</Routes>
 			</Router>
     	</div>

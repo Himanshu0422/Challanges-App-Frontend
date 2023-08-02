@@ -23,3 +23,11 @@ body {
 .button-background-hover:hover{
     background-color: rgba(12 15 25 / 30%);
 }
+
+.border-width{
+    border: 0.3px solid white;
+}
+
+.box-shadow{
+    box-shadow:  0 0 0 5px rgba(255,255,255,.08)
+}
