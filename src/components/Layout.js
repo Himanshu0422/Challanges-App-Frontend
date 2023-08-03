@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setDifficulty, setSearch } from '../redux/questionsSlice';
 
 const Layout = ({ children }) => {
@@ -56,7 +56,7 @@ const Layout = ({ children }) => {
                         const isActive = location.pathname === menu.path;
                         return <div key={i} className={`flex justify-center items-center text-white ${isActive ? 'button-background' : ''}`}>
                             <Link
-                                className='p-3 rounder-lg border-transparent button-background-hover'
+                                className='p-3 rounder-lg border-transparent background-hover flex items-center justify-center h-[100%] w-[100%]'
                                 to={menu.path}>
                                 {menu.name}
                             </Link>
