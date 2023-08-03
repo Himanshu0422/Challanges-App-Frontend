@@ -18,7 +18,6 @@ const Timer = () => {
             }, 1000);
         }
 
-        // Clean up the interval when the component unmounts or when paused
         return () => clearInterval(interval);
     }, [start, time]);
 
@@ -33,7 +32,7 @@ const Timer = () => {
     return (
         <div className='flex justify-center items-center'>
             <img
-                className='w-[30px] h-[30px]'
+                className='w-[30px] h-[30px] cursor-pointer'
                 src={!start ? 'https://img.icons8.com/ios/100/000000/start--v1.png' : 'https://img.icons8.com/ios/50/000000/circled-pause.png'}
                 alt='start-pause'
                 onClick={startHandler}
