@@ -5,12 +5,14 @@ import axios from 'axios';
 import { setUser } from '../redux/userSlice';
 
 const ProtectedRoute = (props) => {
+
+    const URL = process.env.REACT_APP_BACKEND_API;
     const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const getUser = async () => {
         try {
-			const res = await axios.post('/user/get-user-info-by-id', {token: localStorage.getItem('token')}, {
+			const res = await axios.post(`${URL}/user/get-user-info-by-id`, {token: localStorage.getItem('token')}, {
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

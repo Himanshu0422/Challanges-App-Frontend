@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 
 const Question = () => {
 
+    const URL = process.env.REACT_APP_BACKEND_API;
     const nameRef = useRef();
     const descRef = useRef();
     const topicRef = useRef();
@@ -23,7 +24,7 @@ const Question = () => {
         }
 
         try {
-            const response = await axios.post('/v1/question', data);
+            const response = await axios.post(`${URL}/v1/question`, data);
             if (response.data.success) {
                 toast.success(response.data.message);
             } else {

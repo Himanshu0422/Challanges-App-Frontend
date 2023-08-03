@@ -8,6 +8,7 @@ import { hideLoading, showLoading } from '../redux/alertsSlice';
 
 const Challenge = () => {
 
+    const URL = process.env.REACT_APP_BACKEND_API;
     const dispatch = useDispatch();
     const { questionId } = useParams();
     const data = {
@@ -17,7 +18,7 @@ const Challenge = () => {
     const questionData = async () => {
         try {
             dispatch(showLoading());
-            const response = await axios.get('/v1/questionbyid', {
+            const response = await axios.get(`${URL}/v1/questionbyid`, {
                 params: data
             });
             setQues(response.data.data[0]);

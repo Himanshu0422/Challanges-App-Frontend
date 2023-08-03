@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export default function Login() {
 
+    const URL = process.env.REACT_APP_BACKEND_API;
     const emailRef = useRef();
     const passRef = useRef();
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function Login() {
                 email: emailRef.current.value,
                 password: passRef.current.value,
             }
-            const response = await axios.post('/user/login', data);
+            const response = await axios.post(`${URL}/user/login`, data);
             if (response.data.success) {
                 toast.success(response.data.message);
                 localStorage.setItem("token",response.data.data)

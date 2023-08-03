@@ -8,6 +8,7 @@ import { hideLoading, showLoading } from '../../redux/alertsSlice';
 
 const TopicQues = ({ topic }) => {
 
+    const URL = process.env.REACT_APP_BACKEND_API;
     const dispatch = useDispatch();
     const { loading } = useSelector((state) => state.alerts);
     const data = {
@@ -18,7 +19,7 @@ const TopicQues = ({ topic }) => {
     const getQues = async () => {
         try {
             dispatch(showLoading());
-            const response = await axios.get('/v1/question', {
+            const response = await axios.get(`${URL}/v1/question`, {
                 params: data
             });
             setQues(response.data.data);

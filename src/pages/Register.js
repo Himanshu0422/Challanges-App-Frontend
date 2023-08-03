@@ -6,6 +6,7 @@ import axios from 'axios';
 
 export default function Register() {
 
+    const URL = process.env.REACT_APP_BACKEND_API;
     const nameRef = useRef();
     const emailRef = useRef();
     const passRef = useRef();
@@ -19,7 +20,7 @@ export default function Register() {
             password: passRef.current.value,
         }
         try {
-            const response = await axios.post('/user/register', data);
+            const response = await axios.post(`${URL}/user/register`, data);
             if (response.data.success) {
                 toast.success(response.data.message);
                 navigate("/login");
