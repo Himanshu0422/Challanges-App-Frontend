@@ -1,9 +1,12 @@
 import React from 'react';
 import Timer from './Timer';
 import { useNavigate } from 'react-router-dom';
+import { SyncLoader } from 'react-spinners';
+import { useSelector } from 'react-redux';
 
 const MainQuestion = ({ ques }) => {
 
+    const { loading } = useSelector((state) => state.alerts);
     const navigate = useNavigate();
     const { name, description, topic, difficulty, image, solution } = ques || {};
     const handleCLick = () => {
@@ -12,6 +15,11 @@ const MainQuestion = ({ ques }) => {
 
     return (
         <div className='flex flex-col'>
+            {loading && (
+                <div className="spinner-parent">
+                    <SyncLoader color='#36d7b7' />
+                </div>
+            )}
             <div className='flex justify-between items-center px-2 my-1'>
                 <img
                     onClick={() => navigate('/challenges')}
