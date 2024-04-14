@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { AiOutlineLogout } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
 
 export default function Header() {
 
-    const { user } = useSelector((state) => state.user);
+    const user = localStorage.getItem('user');
     const navigate = useNavigate();
     const handleLinkClick = () => {
         window.open('https://www.linkedin.com/in/himanshumittal035/', '_blank');
@@ -56,7 +55,7 @@ export default function Header() {
                             alt='home' className='w-[25px] h-[25px] m-1' />
                         <div className='p-1 font-serif text-lg'>Author</div>
                     </li>
-                    {user?.isAdmin ? (
+                    {user ? (
                         <li className='flex cursor-pointer px-3'
                             onClick={() => navigate('/question')}
                         >
@@ -72,23 +71,16 @@ export default function Header() {
                         </li>
                     )
                     }
-                    <li className='flex cursor-pointer px-3'
-                        onClick={() => logoutHandler()}
-                    >
-                        <AiOutlineLogout className='w-[25px] h-[25px] m-1' />
-                        <div className='p-1 font-serif text-lg'>Logout</div>
-                    </li>
                 </ul>
             </nav>
             <div onClick={handleNav} className='block lg:hidden cursor-pointer'>
                 {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
             </div>
-            <ul className={nav ? 'fixed left-0 top-0 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500 text-white z-20' : 'ease-in-out duration-500 fixed left-[-100%]'}>
+            <ul className={nav ? 'fixed left-0 top-0 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500 text-white z-20' : 'ease-in-out duration-500 fixed left-[-100%] top-0 w-[60%] h-full'}>
                 <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => {navigate('/')}}>Home</li>
                 <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => navigate('/challenges')}>Challenges</li>
                 <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => handleLinkClick()}>About</li>
-                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => navigate('/question')}>{user?.isAdmin ? 'Add Question' : 'Contribute'}</li>
-                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => logoutHandler()}>Logout</li>
+                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => navigate('/question')}>{user ? 'Add Question' : 'Contribute'}</li>
             </ul>
         </div>
     )

@@ -68,7 +68,7 @@ const Layout = ({ children }) => {
                 <div onClick={handleSidebar} className='block lg:hidden cursor-pointer mt-2 ml-2 z-10 w-7'>
                     {sidebar ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
                 </div>
-                <ul className={sidebar ? 'fixed left-0 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500' : 'ease-in-out duration-500 fixed left-[-100%]'}>
+                <ul className={sidebar ? 'fixed left-0 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500' : 'ease-in-out duration-500 fixed left-[-100%] w-[60%] h-full'}>
                     {questionMenu.map((menu, i) => {
                         return <li key={i} className='flex justify-center items-center text-white' onClick={handleSidebar}>
                             <Link

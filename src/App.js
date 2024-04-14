@@ -2,22 +2,19 @@ import {
 	BrowserRouter as Router,
 	Route,
 	Routes,
-  } from "react-router-dom";
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import PublicRoute from "./components/PublicRoute";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Question from "./pages/Question";
 import ContributedQuestion from "./pages/ContributedQuestion";
 import Challenges from "./pages/Challenges";
 import ChallengesIntro from "./pages/Challenges/ChallengesIntro";
 import TopicQues from "./pages/Challenges/TopicQues";
 import Challenge from "./pages/Challenge";
+import QuestionTable from "./pages/QuestionTable";
 
 function App() {
-	
+
 	return (
 		<div>
 			<Router>
@@ -27,54 +24,28 @@ function App() {
 						exact
 						path="/"
 						element={
-							<ProtectedRoute>
-								<Home />
-							</ProtectedRoute>
-						}
-					/>
-					<Route
-						exact
-						path="/register"
-						element={
-							<PublicRoute>
-								<Register />
-							</PublicRoute>
-						}
-					/>
-					<Route
-						exact
-						path="/login"
-						element={
-							<PublicRoute>
-								<Login />
-							</PublicRoute>
+							<Home />
 						}
 					/>
 					<Route
 						exact
 						path="/question"
 						element={
-							<ProtectedRoute>
-								<Question />
-							</ProtectedRoute>
+							<Question />
 						}
 					/>
 					<Route
 						exact
 						path="/contribute"
 						element={
-							<ProtectedRoute>
-								<ContributedQuestion />
-							</ProtectedRoute>
+							<ContributedQuestion />
 						}
 					/>
 					<Route
 						exact
 						path="/challenges"
 						element={
-							<ProtectedRoute>
-								<Challenges />
-							</ProtectedRoute>
+							<Challenges />
 						}
 					>
 						<Route path="/challenges" element={<ChallengesIntro />} />
@@ -89,14 +60,19 @@ function App() {
 						exact
 						path="/challenge/:questionId"
 						element={
-							<ProtectedRoute>
-								<Challenge />
-							</ProtectedRoute>
+							<Challenge />
+						}
+					/>
+					<Route
+						exact
+						path="/table"
+						element={
+							<QuestionTable />
 						}
 					/>
 				</Routes>
 			</Router>
-    	</div>
+		</div>
 	);
 }
 

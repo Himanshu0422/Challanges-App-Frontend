@@ -23,6 +23,7 @@ const TopicQues = ({ topic }) => {
                 params: data
             });
             setQues(response.data.data);
+            console.log(ques);
             dispatch(hideLoading());
         } catch (error) {
             toast.error("Something went wrong");
