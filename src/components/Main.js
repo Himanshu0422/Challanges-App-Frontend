@@ -1,6 +1,10 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function Main() {
+
+    const navigate = useNavigate();
+
     return (
         <div className="m-20 text-white flex justify-center items-center max-lg:flex-col">
             <div className="lg:w-1/2">
@@ -9,7 +13,8 @@ export default function Main() {
                     We have exciting challenges for you to take on. Contribute and join
                     our community!
                 </p>
-                <button className="bg-purple-600 px-4 py-2 rounded-md font-semibold hover:bg-purple-700">
+                <button className="bg-purple-600 px-4 py-2 rounded-md font-semibold hover:bg-purple-700"
+                onClick={() => navigate('/challenges')}>
                     Get Started
                 </button>
             </div>
