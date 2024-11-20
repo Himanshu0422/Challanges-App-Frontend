@@ -1,12 +1,12 @@
-import React from 'react'
-import Header from '../components/Header'
-import Main from '../components/Main'
+import React from 'react';
+import Header from '../components/Header';
+import Main from '../components/Main';
 
 export default function Home() {
     return (
-        <div className='relative top-7'>
+        <div className="min-h-screen">
             <Header />
             <Main />
         </div>
-    )
+    );
 }
