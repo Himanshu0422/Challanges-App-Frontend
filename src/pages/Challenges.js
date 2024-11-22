@@ -1,15 +1,11 @@
-import React from 'react'
-import Header from '../components/Header';
-import Layout from '../components/Layout';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Layout from '../components/Layout';
 
 const Challenges = () => {
 
     return (
         <div>
-            <div>
-                <Header />
-            </div>
             <div>
                 <Layout>
                     <Outlet />
