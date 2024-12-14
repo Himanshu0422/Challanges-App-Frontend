@@ -1,87 +1,78 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { AiOutlineLogout } from 'react-icons/ai';
+import { gsap } from 'gsap';
+import { navItems } from '../utils/navItems';
+import Sidebar from './Sidebar';
 
 export default function Header() {
+  const navigate = useNavigate();
+  const headerRef = useRef(null);
+  const navRef = useRef(null);
 
-    const user = localStorage.getItem('user');
-    const navigate = useNavigate();
-    const handleLinkClick = () => {
-        window.open('https://www.linkedin.com/in/himanshumittal035/', '_blank');
-    };
-    const [nav, setNav] = useState(false);
-    const handleNav = () => {
-        setNav(!nav);
-    };
+  useEffect(() => {
+    // Animate header title
+    gsap.fromTo(
+      headerRef.current,
+      { opacity: 0, y: -50 },
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+    );
 
-    const logoutHandler = () => {
-        localStorage.clear();
-        navigate('/login');
-    }
+    // Animate nav items
+    gsap.fromTo(
+      navRef.current?.children,
+      { opacity: 0, x: -30 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.2,
+      }
+    );
+  }, []);
 
-    return (
-        <div className="flex justify-between items-center p-7 mb-7">
-            <div className=''>
-                <h1 className='text-4xl italic font-mono lg:flex hidden'>
-                    Challenges App
-                </h1>
-                <h1 className='text-4xl italic font-mono max-lg:flex hidden'>
-                    Challenges
-                </h1>
-                <h1 className='text-4xl italic font-mono max-lg:flex hidden'>
-                    App
-                </h1>
-            </div>
-            <nav className="text-white hidden lg:flex">
-                <ul className='flex'>
-                    <li className='flex cursor-pointer px-3'
-                        onClick={() => navigate('/')}
-                    >
-                        <img src='https://img.icons8.com/office/40/000000/home--v1.png' alt='home' className='w-[25px] h-[25px] m-1' />
-                        <div className='p-1 font-serif text-lg'>Home</div>
-                    </li>
-                    <li className='flex cursor-pointer px-3'
-                        onClick={() => navigate('/challenges')}
-                    >
-                        <img src='https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/000000/external-coding-online-learning-vitaliy-gorbachev-flat-vitaly-gorbachev.png'
-                            alt='home' className='w-[25px] h-[25px] m-1' />
-                        <div className='p-1 font-serif text-lg'>Challenges</div>
-                    </li>
-                    <li className='flex cursor-pointer px-3'
-                        onClick={() => handleLinkClick()}
-                    >
-                        <img src='https://img.icons8.com/external-sbts2018-outline-color-sbts2018/58/000000/external-developer-basic-ui-elements-2.2-sbts2018-outline-color-sbts2018.png'
-                            alt='home' className='w-[25px] h-[25px] m-1' />
-                        <div className='p-1 font-serif text-lg'>Author</div>
-                    </li>
-                    {user ? (
-                        <li className='flex cursor-pointer px-3'
-                            onClick={() => navigate('/question')}
-                        >
-                            <img src='https://img.icons8.com/officel/40/000000/community-grants.png' alt='home' className='w-[25px] h-[25px] m-1' />
-                            <div className='p-1 font-serif text-lg'>Add Question</div>
-                        </li>
-                    ) : (
-                        <li className='flex cursor-pointer px-3'
-                            onClick={() => navigate('/contribute')}
-                        >
-                            <img src='https://img.icons8.com/officel/40/000000/community-grants.png' alt='home' className='w-[25px] h-[25px] m-1' />
-                            <div className='p-1 font-serif text-lg'>Contribute</div>
-                        </li>
-                    )
-                    }
-                </ul>
-            </nav>
-            <div onClick={handleNav} className='block lg:hidden cursor-pointer'>
-                {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-            </div>
-            <ul className={nav ? 'fixed left-0 top-0 bg-opacity-50 backdrop-blur-lg w-[60%] h-full ease-in-out duration-500 text-white z-20' : 'ease-in-out duration-500 fixed left-[-100%] top-0 w-[60%] h-full'}>
-                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => {navigate('/')}}>Home</li>
-                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => navigate('/challenges')}>Challenges</li>
-                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => handleLinkClick()}>About</li>
-                <li className='p-4 border-b border-gray-600 cursor-pointer' onClick={() => navigate('/question')}>{user ? 'Add Question' : 'Contribute'}</li>
-            </ul>
-        </div>
-    )
+  return (
+    <div className="flex justify-between items-center p-7">
+      {/* Header Title */}
+      <div
+        onClick={() => navigate('/')}
+        className="cursor-pointer"
+        ref={headerRef}
+      >
+        <h1 className="text-4xl italic font-mono lg:flex hidden">
+          Challenges App
+        </h1>
+        <h1 className="text-4xl italic font-mono max-lg:flex hidden">
+          Challenges
+        </h1>
+        <h1 className="text-4xl italic font-mono max-lg:flex hidden">App</h1>
+      </div>
+
+      {/* Navigation Items */}
+      <nav className="text-black hidden lg:flex">
+        <ul className="flex" ref={navRef}>
+          {navItems.map((item) => (
+            <li
+              key={item.text}
+              className="flex cursor-pointer px-3"
+              onClick={() =>
+                item.route ? navigate(item.route) : item.action?.()
+              }
+            >
+              <img
+                src={item.icon}
+                alt={item.text}
+                className="w-[25px] h-[25px] m-1"
+              />
+              <div className="p-1 font-serif text-lg">{item.text}</div>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div className="lg:hidden">
+        <Sidebar />
+      </div>
+    </div>
+  );
 }
