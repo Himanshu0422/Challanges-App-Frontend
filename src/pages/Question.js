@@ -129,7 +129,7 @@ const Question = () => {
                                 required
                             />
                         </div>
-                        <button className="bg-purple-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-purple-700"
+                        <button className="bg-purple-600 text-black py-2 px-4 rounded-md font-semibold hover:bg-purple-700"
                             type="submit"
                         >
                             Submit
