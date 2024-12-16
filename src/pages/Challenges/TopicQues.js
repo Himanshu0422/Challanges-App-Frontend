@@ -34,7 +34,7 @@ const TopicQues = ({ topic }) => {
     }, [topic]);
 
     return (
-        <div className='flex flex-wrap justify-evenly h-[100%] w-[100%] overflow-auto items-center'>
+        <div className='flex flex-wrap justify-evenly h-[100%] w-[100%] overflow-auto items-center gap-y-10'>
             {loading && (
                 <div className="spinner-parent">
                     <SyncLoader color='#36d7b7' />

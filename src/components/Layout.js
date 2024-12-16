@@ -111,6 +111,7 @@ export default function Component({ children }) {
               <option disabled selected>
                 Difficulty
               </option>
+              <option value="All">All</option>
               <option value="Easy">Easy</option>
               <option value="Medium">Medium</option>
               <option value="Difficult">Difficult</option>
