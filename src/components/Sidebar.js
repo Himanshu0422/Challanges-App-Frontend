@@ -72,7 +72,11 @@ export default function Sidebar() {
 											<img
 												src={item.icon}
 												alt={item.text}
-												style={{ width: 25, height: 25 }}
+												style={{
+													width: 25,
+													height: 25,
+													filter: "invert(100%)", // Makes the image white
+												}}
 											/>
 										</ListItemIcon>
 										<ListItemText>
