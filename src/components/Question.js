@@ -13,7 +13,7 @@ const Question = ({ ques, i }) => {
             <div className='flex flex-col justify-evenly h-full'>
                 <div className='flex justify-between px-5 gap-4'>
                     <img
-                        src='https://reactchallenges.live/20adfb35ae6a6e5817bf.png'
+                        src='https://res.cloudinary.com/ds6nhnm3n/image/upload/v1777959411/Challenges-App/React_kztrrk.png'
                         alt='react'
                         height={50}
                         width={50}

@@ -66,11 +66,12 @@ const MainQuestion = ({ ques }) => {
                     />
                 </div>
                 <div className='w-[70%] h-full sm:flex hidden'>
-                    <iframe
-                        src='https://codesandbox.io/s/festive-turing-84svy2?file=/src/App.js'
+                    {/* <iframe
+                        src='<iframe src="https://stackblitz.com/edit/react" />'
                         title='codesandbox'
                         className='w-[100%] h-[100%]'
-                    />
+                    /> */}
+                    <iframe src="https://stackblitz.com/edit/react" title="stacjkblitz" className='w-[100%] h-[100%]' />
                 </div>
             </div>
         </div>
